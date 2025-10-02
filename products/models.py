@@ -41,3 +41,33 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f'Image of {self.product.name}'
+
+
+class ProductVariant(models.Model):
+    SIZE_CHOICES = [
+        ('S', 'Small'),
+        ('M', 'Medium'),
+        ('L', 'Large'),
+        ('XL', 'Extra Large'),
+        ('XXL', 'Double Extra Large'),
+    ]
+
+    MATERIAL_CHOICES = [
+        ('Cotton', 'Cotton'),
+        ('Polyester', 'Polyester'),
+        ('Silk', 'Silk'),
+        ('Linen', 'Linen'),
+        ('Wool', 'Wool'),
+        ('Leather', 'Leather'),
+        ('Nylon', 'Nylon'),
+        ('Other', 'Other'),
+    ]
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="variants")
+    size = models.CharField(max_length=10, choices=SIZE_CHOICES)
+    material = models.CharField(max_length=20, choices=MATERIAL_CHOICES)
+    color = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.product.name} - {self.size}/{self.material}/{self.color}"
