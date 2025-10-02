@@ -17,6 +17,14 @@ class PersonSerializer(serializers.ModelSerializer):
 
 
 
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ['image', 'is_main']
+
+
+
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
