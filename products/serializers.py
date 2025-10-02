@@ -24,8 +24,18 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
 
 
+class ProducVariantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductVariant
+        fields = ['size','material','color']
+
 
 class ProductSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)       
+    person = PersonSerializer(read_only=True)
+    images = ProductImageSerializer(many=True, read_only=True)
+    variants = ProducVariantSerializer(many=True, read_only=True)
+
     class Meta:
         model = Product
         fields = "__all__"
