@@ -31,11 +31,15 @@ class ProducVariantSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)       
-    person = PersonSerializer(read_only=True)
+    category = CategorySerializer(read_only=True)
+    person = PersonSerializer(read_only=True)  # read-only nested
+    person_id = serializers.PrimaryKeyRelatedField(
+        queryset=Person.objects.all(), write_only=True, source='person'
+    )
     images = ProductImageSerializer(many=True, read_only=True)
     variants = ProducVariantSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
         fields = "__all__"
+
