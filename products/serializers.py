@@ -10,6 +10,11 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 
+class PersonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Person
+        fields = ['name','phone','company','address','city']
+
 
 
 class ProductSerializer(serializers.ModelSerializer):
